@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    이름: <input type="text" id="uiName"><br>
+    비번: <input type="password" id="uiPwd"><br>
+    <button onclick="updateUser()">수정</button>
+    <script>
+        async function updateUser(){
+            const data = {
+                uiName : document.querySelector('#uiName').value,
+                uiPwd : document.querySelector('#uiPwd').value
+            }
+            const json = JSON.stringify(data);
+            const res = await fetch('http://localhost/user-infos',{method : 'PUT', 
+            headers: {
+                'content-type' : 'application/json;charset=UTF-8'
+            }, body : json});
+            const result = await res.text();
+            if(result === '1'){
+                alert('수정 성공!');
+                location.href='/user-infos.html';
+            }
+        }
+
+        window.addEventListener('load',function(){
+            
+        })
+
+    </script>
+</body>
+</html>
